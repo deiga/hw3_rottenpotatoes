@@ -31,12 +31,14 @@ Then I should see all of the movies:
 | Raiders of the Lost Ark |
 | Amelie                  |
 | The Terminator          |
+| When Harry Met Sally    |
 And I should not see all of the movies:
 | title                   |
 | Chicken Run             |
 | Chocolat                |
 | Aladdin                 |
 | 2001: A Space Odyssey   |
+| The Help                |
 
 Scenario: no ratings selected
   # see assignment
