@@ -24,10 +24,20 @@ Background: movies have been added to database
 Scenario: sort movies alphabetically
   Given all movies have been selected
   When I follow "Movie Title"
-  Then I should see "Aladdin" before "Amelie"
+  Then the results should be sorted:
+  | before                  | after                   |
+  | 2001: A Space Odyssey   | Aladdin                 |
+  | Aladdin                 | Amelie                  |
+  | Amelie                  | Chicken Run             |
+  | Chicken Run             | Chocolat                |
+  | Chocolat                | Raiders of the Lost Ark |
+  | Raiders of the Lost Ark | The Help                |
+  | The Help                | The Incredibles         |
+  | The Incredibles         | The Terminator          |
+  | The Terminator          | When Harry Met Sally    |
 
 Scenario: sort movies in increasing order of release date
   Given all movies have been selected
   When I follow "Release Date"
-  Then I should see "Aladdin" before "Amelie"
+  Then I should see "Raiders of the Lost Ark" before "The Terminator"
 

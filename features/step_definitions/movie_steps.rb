@@ -15,9 +15,18 @@ Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.content  is the entire content of the page as a string.
   content = page.body
-  assert content.index(e1) < content.index(e2)
+  index1 = content.index(e1)
+  index2 = content.index(e2)
+  assert (not index1.nil?), "#{e1}, #{e2}"
+  assert (not index2.nil?), "#{e1}, #{e2}, #{content}" #This fails for whatever reason...
+  assert index1 < index2, "#{index1}, #{index2}"
 end
 
+Then /^the results should be sorted:$/ do |table|
+  table.hashes.each do |movie_pair|
+    step %Q{I should see "#{movie_pair[:before]}" before "#{movie_pair[:after]}"}
+  end
+end
 # Make it easier to express checking or unchecking several boxes at once
 #  "When I uncheck the following ratings: PG, G, R"
 #  "When I check the following ratings: G"
