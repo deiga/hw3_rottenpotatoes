@@ -35,9 +35,11 @@ Then /^I should (not )?see all of the movies:$/ do |neg, movies_table|
     step %Q{I should #{neg}see "#{movie[:title]}"}
   end
   rows = movies_table.hashes.count
-  if page.respond_to? :should
-    page.should have_css("table#movies tr", :count => rows)
-  else
-    assert page.has_css?("table#movies tbody>tr", :count => rows), "#{page.all("table#movies tbody>tr").count} #{rows}"
+  if neg.nil?
+    if page.respond_to? :should
+      page.should have_css("table#movies tbody>tr", :count => rows)
+    else
+      assert page.has_css?("table#movies tbody>tr", :count => rows), "#{page.all("table#movies tbody>tr").count} #{rows}"
+    end
   end
 end

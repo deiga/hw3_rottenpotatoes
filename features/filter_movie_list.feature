@@ -41,7 +41,20 @@ And I should not see all of the movies:
 | The Help                |
 
 Scenario: no ratings selected
-  # see assignment
+  When I uncheck the following ratings: PG,R,G,NC-17,PG-13
+  And I press "Refresh"
+  Then I should not see all of the movies:
+  | title                   |
+  | Aladdin                 |
+  | The Terminator          |
+  | When Harry Met Sally    |
+  | The Help                |
+  | Chocolat                |
+  | Amelie                  |
+  | 2001: A Space Odyssey   |
+  | The Incredibles         |
+  | Raiders of the Lost Ark |
+  | Chicken Run             |
 
   Scenario: all ratings selected
   When I check the following ratings: PG,R,G,NC-17,PG-13
