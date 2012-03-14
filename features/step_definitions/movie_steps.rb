@@ -14,7 +14,8 @@ end
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.content  is the entire content of the page as a string.
-  assert false, "Unimplmemented"
+  content = page.body
+  assert content.index(e1) < content.index(e2)
 end
 
 # Make it easier to express checking or unchecking several boxes at once
@@ -42,4 +43,9 @@ Then /^I should (not )?see all of the movies:$/ do |neg, movies_table|
       assert page.has_css?("table#movies tbody>tr", :count => rows), "#{page.all("table#movies tbody>tr").count} #{rows}"
     end
   end
+end
+
+Given /^all movies have been selected$/ do
+  step "I check the following ratings: PG,R,G,NC-17,PG-13"
+  step %Q{I press "Refresh"}
 end
