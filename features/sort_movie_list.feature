@@ -29,8 +29,8 @@ Scenario: sort movies alphabetically
   | 2001: A Space Odyssey   | Aladdin                 |
   | Aladdin                 | Amelie                  |
   | Amelie                  | Chicken Run             |
-  | Chicken Run             | Chocolat                |
-  | Chocolat                | Raiders of the Lost Ark |
+  | Chicken Run             | Chocolat                |
+  | Chocolat                | Raiders of the Lost Ark |
   | Raiders of the Lost Ark | The Help                |
   | The Help                | The Incredibles         |
   | The Incredibles         | The Terminator          |
@@ -39,5 +39,16 @@ Scenario: sort movies alphabetically
 Scenario: sort movies in increasing order of release date
   Given all movies have been selected
   When I follow "Release Date"
-  Then I should see "Raiders of the Lost Ark" before "The Terminator"
+  Then the results should be sorted:
+  | before                  | after                   |
+  | 2001: A Space Odyssey   | Raiders of the Lost Ark |
+  | Raiders of the Lost Ark | The Terminator          |
+  | The Terminator          | When Harry Met Sally    |
+  | When Harry Met Sally    | Aladdin                 |
+  | Aladdin                 | Chicken Run             |
+  | Chicken Run             | Chocolat                |
+  | Chocolat                | Amelie                  |
+  | Amelie                  | The Incredibles         |
+  | The Incredibles         | The Help                |
+
 

@@ -17,8 +17,8 @@ Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   content = page.body
   index1 = content.index(e1)
   index2 = content.index(e2)
-  assert (not index1.nil?), "#{e1}, #{e2}"
-  assert (not index2.nil?), "#{e1}, #{e2}, #{content}" #This fails for whatever reason...
+  assert index1, "#{e1}, #{e2}"
+  assert index2, "#{e1}, #{e2}"
   assert index1 < index2, "#{index1}, #{index2}"
 end
 
@@ -27,6 +27,7 @@ Then /^the results should be sorted:$/ do |table|
     step %Q{I should see "#{movie_pair[:before]}" before "#{movie_pair[:after]}"}
   end
 end
+
 # Make it easier to express checking or unchecking several boxes at once
 #  "When I uncheck the following ratings: PG, G, R"
 #  "When I check the following ratings: G"
