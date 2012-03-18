@@ -14,12 +14,11 @@ end
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.content  is the entire content of the page as a string.
-  content = page.body
-  index1 = content.index(e1)
-  index2 = content.index(e2)
-  assert index1, "#{e1}, #{e2}"
-  assert index2, "#{e1}, #{e2}"
-  assert index1 < index2, "#{index1}, #{index2}"
+  index1 = page.body.index(e1)
+  index2 = page.body.index(e2)
+  index1.should_not be nil
+  index2.should_not be nil
+  index1.should be < index2
 end
 
 Then /^the results should be sorted:$/ do |table|
